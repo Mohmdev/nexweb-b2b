@@ -1,10 +1,10 @@
 import {
   BoldFeature,
   ItalicFeature,
-  lexicalEditor,
   LinkFeature,
   ParagraphFeature,
   UnderlineFeature,
+  lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
 import { Config } from 'payload'
@@ -34,7 +34,7 @@ export const defaultLexical: Config['editor'] = lexicalEditor({
               },
               label: ({ t }) => t('fields:enterURL'),
               required: true,
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              // biome-ignore lint/suspicious/noExplicitAny: <explanation>
               validate: (value: any, options: any) => {
                 if (options?.siblingData?.linkType === 'internal') {
                   return true // no validation needed, as no url should exist for internal links

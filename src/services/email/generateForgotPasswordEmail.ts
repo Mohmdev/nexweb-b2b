@@ -8,7 +8,7 @@ type ForgotPasswordEmailArgs =
   | {
       req?: PayloadRequest
       token?: string
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       user?: any
     }
   | undefined

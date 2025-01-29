@@ -26,8 +26,7 @@ export const formatUploadAlt = (val: string): string => {
 
 export const formatUploadAltHook =
   (fallback: string): FieldHook =>
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ({ data, operation, originalDoc, value }) => {
+  ({ data, operation, value }) => {
     if (typeof value === 'string') {
       return formatUploadAlt(value)
     }

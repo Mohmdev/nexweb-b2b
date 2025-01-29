@@ -1,4 +1,4 @@
-import { User } from 'src/payload-types'
+import { User } from '@payload-types'
 
 import type { CollectionAfterReadHook } from 'payload'
 

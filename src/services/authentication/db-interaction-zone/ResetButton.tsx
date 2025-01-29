@@ -9,7 +9,7 @@ import type { User } from '@payload-types'
 const SuccessMessage: React.FC = () => (
   <div>
     Database reset complete! You can now{' '}
-    <a target="_blank" href="/">
+    <a target="_blank" href="/" rel="noreferrer">
       visit your website
     </a>
   </div>

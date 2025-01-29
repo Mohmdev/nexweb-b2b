@@ -1,5 +1,5 @@
+import type { Page, Post } from '@payload-types'
 import type React from 'react'
-import type { Page, Post } from '@/payload-types'
 
 import { getCachedDocument } from '@utils/getDocument'
 import { getCachedRedirects } from '@utils/getRedirects'

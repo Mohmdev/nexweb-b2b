@@ -1,13 +1,12 @@
-import { cn } from '@utils/ui'
 import React, { Fragment } from 'react'
 
-import type { Page } from '@/payload-types'
+import type { Page } from '@payload-types'
 
-import { ArchiveBlock } from '@CMS/blocks/ArchiveBlock/Component'
-import { CallToActionBlock } from '@CMS/blocks/CallToAction/Component'
-import { ContentBlock } from '@CMS/blocks/Content/Component'
-import { FormBlock } from '@CMS/blocks/Form/Component'
-import { MediaBlock } from '@CMS/blocks/MediaBlock/Component'
+import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
+import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+import { ContentBlock } from '@/blocks/Content/Component'
+import { FormBlock } from '@/blocks/Form/Component'
+import { MediaBlock } from '@/blocks/MediaBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,

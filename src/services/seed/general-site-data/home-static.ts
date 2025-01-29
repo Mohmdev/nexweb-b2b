@@ -1,4 +1,4 @@
-import type { Page } from '@/payload-types'
+import type { Page } from '@payload-types'
 
 // @ts-expect-error Used for pre-seeded content so that the homepage is not empty
 export const homeStatic: Page = {

@@ -4,7 +4,7 @@ import path from 'path'
 import ejs from 'ejs'
 import juice from 'juice'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const generateEmailHTML = async (data: any): Promise<string> => {
   const templatePath = path.join(
     process.cwd(),

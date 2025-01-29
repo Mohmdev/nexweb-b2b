@@ -1,19 +1,19 @@
 import type { Metadata } from 'next'
 
 import { RelatedPosts } from '@CMS/blocks/RelatedPosts/Component'
-import { PayloadRedirects } from '@/components/PayloadRedirects'
+import { PayloadRedirects } from '@components/PayloadRedirects'
+import RichText from '@components/RichText'
 import configPromise from '@payload-config'
-import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
+import { getPayload } from 'payload'
 import React, { cache } from 'react'
-import RichText from '@/components/RichText'
 
-import type { Post } from '@/payload-types'
+import type { Post } from '@payload-types'
 
 import { PostHero } from '@/heros/PostHero'
+import { LivePreviewListener } from '@components/LivePreviewListener'
 import { generateMeta } from '@utils/generateMeta'
 import PageClient from './page.client'
-import { LivePreviewListener } from '@/components/LivePreviewListener'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
