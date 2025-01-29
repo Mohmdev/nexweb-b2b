@@ -10,9 +10,11 @@ import React, { cache } from 'react'
 
 import type { Post } from '@payload-types'
 
-import { PostHero } from '@/heros/PostHero'
 import { LivePreviewListener } from '@components/LivePreviewListener'
-import { generateMeta } from '@utils/generateMeta'
+import { PostHero } from '@heros/PostHero'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+
+import { generateMeta } from '@services/seo/generateMeta'
 import PageClient from './page.client'
 
 export async function generateStaticParams() {
@@ -64,15 +66,13 @@ export default async function Post({ params: paramsPromise }: Args) {
         <div className="container">
           <RichText
             className="max-w-[48rem] mx-auto"
-            data={post.content}
+            data={post.content as SerializedEditorState}
             enableGutter={false}
           />
-          {post.relatedPosts && post.relatedPosts.length > 0 && (
+          {post.relatedDocs && post.relatedDocs.length > 0 && (
             <RelatedPosts
               className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-              docs={post.relatedPosts.filter(
-                (post) => typeof post === 'object',
-              )}
+              docs={post.relatedDocs.filter((post) => typeof post === 'object')}
             />
           )}
         </div>

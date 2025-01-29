@@ -13,6 +13,9 @@ import {
 import { Config } from 'payload'
 
 export const fullLexical: Config['editor'] = lexicalEditor({
+  admin: {
+    hideGutter: true,
+  },
   features: ({ rootFeatures }) => {
     return [
       ...rootFeatures,

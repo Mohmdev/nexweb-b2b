@@ -1,8 +1,8 @@
 import type { CollectionConfig } from 'payload'
 
-import { isUser } from '@access/access/isUser'
-import { anyone } from '@access/access/anyone'
 import { slugField } from '@CMS/fields/shared/slug/config'
+import { anyone } from '@auth/access/anyone'
+import { isUser } from '@auth/access/isUser'
 import { minimalLexical } from '@services/editor/minimalLexical'
 
 export const Categories: CollectionConfig<'categories'> = {

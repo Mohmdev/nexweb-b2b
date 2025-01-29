@@ -1,10 +1,10 @@
+import { anyone } from '@auth/access/anyone'
+import { isAdminOrEditor } from '@auth/access/isAdminOrEditor'
+import { isAdminOrSelf } from '@auth/access/isAdminOrSelf'
 import { slugField } from '@fields/shared/slug/config'
-import { anyone } from '@access/access/anyone'
-import { isAdminOrEditor } from '@access/access/isAdminOrEditor'
-import { isAdminOrSelf } from '@access/access/isAdminOrSelf'
 
-import type { CollectionConfig } from 'payload'
 import { minimalLexical } from '@services/editor/minimalLexical'
+import type { CollectionConfig } from 'payload'
 
 export const Tags: CollectionConfig<'tags'> = {
   slug: 'tags',

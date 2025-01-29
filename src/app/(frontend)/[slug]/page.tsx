@@ -9,10 +9,11 @@ import React, { cache } from 'react'
 
 import type { Page as PageType } from '@payload-types'
 
-import { RenderHero } from '@/heros/RenderHero'
 import { RenderBlocks } from '@CMS/blocks/RenderBlocks'
 import { LivePreviewListener } from '@components/LivePreviewListener'
-import { generateMeta } from '@utils/generateMeta'
+import { RenderHero } from '@heros/RenderHero'
+
+import { generateMeta } from '@services/seo/generateMeta'
 import PageClient from './page.client'
 
 export async function generateStaticParams() {
@@ -83,7 +84,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
 export async function generateMetadata({
   params: paramsPromise,
-}): Promise<Metadata> {
+}: Args): Promise<Metadata> {
   const { slug = 'home' } = await paramsPromise
   const page = await queryPageBySlug({
     slug,
