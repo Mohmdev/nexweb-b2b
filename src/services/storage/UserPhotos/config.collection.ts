@@ -1,5 +1,5 @@
-import { anyone } from '@access/access/anyone'
-import { isAdminOrSelf } from '@access/access/isAdminOrSelf'
+import { anyone } from '@auth/access/anyone'
+import { isAdminOrSelf } from '@auth/access/isAdminOrSelf'
 
 import type { CollectionConfig } from 'payload'
 

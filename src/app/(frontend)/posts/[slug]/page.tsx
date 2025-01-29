@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { RelatedPosts } from '@CMS/blocks/RelatedPosts/Component'
+import { RelatedDocs } from '@CMS/blocks/RelatedDocs/Component'
 import { PayloadRedirects } from '@components/PayloadRedirects'
 import RichText from '@components/RichText'
 import configPromise from '@payload-config'
@@ -70,7 +70,7 @@ export default async function Post({ params: paramsPromise }: Args) {
             enableGutter={false}
           />
           {post.relatedDocs && post.relatedDocs.length > 0 && (
-            <RelatedPosts
+            <RelatedDocs
               className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
               docs={post.relatedDocs.filter((post) => typeof post === 'object')}
             />

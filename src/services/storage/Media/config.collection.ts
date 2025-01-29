@@ -1,11 +1,11 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { minimalLexical } from '@services/editor/minimalLexical'
 import { tagsField } from '@CMS/fields/shared/tagsField'
-import { anyone } from '@access/access/anyone'
-import { isAdminOrEditor } from '@access/access/isAdminOrEditor'
-import { isAdminOrSelf } from '@access/access/isAdminOrSelf'
+import { anyone } from '@auth/access/anyone'
+import { isAdminOrEditor } from '@auth/access/isAdminOrEditor'
+import { isAdminOrSelf } from '@auth/access/isAdminOrSelf'
+import { minimalLexical } from '@services/editor/minimalLexical'
 
 import type { CollectionConfig } from 'payload'
 

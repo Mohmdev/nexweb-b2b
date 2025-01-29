@@ -1,19 +1,19 @@
-import { generateForgotPasswordEmail } from '@services/email/generateForgotPasswordEmail'
-import { generateVerificationEmail } from '@services/email/generateVerificationEmail'
-import { anyone } from '@access/access/anyone'
-import { hasAdminPanelAccess } from '@access/access/hasAdminPanelAccess'
-import { isAdminFieldLevel } from '@access/access/isAdmin'
-import { isAdminOrEditor } from '@access/access/isAdminOrEditor'
-import { isAdminOrEditorOrSelf } from '@access/access/isAdminOrEditorOrSelf'
+import { anyone } from '@auth/access/anyone'
+import { hasAdminPanelAccess } from '@auth/access/hasAdminPanelAccess'
+import { isAdminFieldLevel } from '@auth/access/isAdmin'
+import { isAdminOrEditor } from '@auth/access/isAdminOrEditor'
+import { isAdminOrEditorOrSelf } from '@auth/access/isAdminOrEditorOrSelf'
 import {
   isAdminOrSelf,
   isAdminOrSelfFieldLevel,
-} from '@access/access/isAdminOrSelf'
+} from '@auth/access/isAdminOrSelf'
+import { generateForgotPasswordEmail } from '@services/email/generateForgotPasswordEmail'
+import { generateVerificationEmail } from '@services/email/generateVerificationEmail'
 
 import type { CollectionConfig } from 'payload'
 
-import { ensureFirstUserIsAdmin } from './ensureFirstUserIsAdmin'
 import { ROLES_WITH_ADMIN_ACCESS } from '@services/control-board'
+import { ensureFirstUserIsAdmin } from './ensureFirstUserIsAdmin'
 
 export const Users: CollectionConfig<'users'> = {
   slug: 'users',

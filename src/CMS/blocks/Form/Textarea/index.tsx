@@ -9,7 +9,7 @@ import { Label } from '@components/ui/label'
 import { Textarea as TextAreaComponent } from '@components/ui/textarea'
 import React from 'react'
 
-import { Error as FormError } from '../Error'
+import { FormError } from '../Error'
 import { Width } from '../Width'
 
 export const Textarea: React.FC<

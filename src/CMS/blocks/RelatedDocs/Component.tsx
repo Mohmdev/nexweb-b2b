@@ -8,13 +8,13 @@ import { Card } from '@components/Card'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { cn } from '@utils/ui'
 
-export type RelatedPostsProps = {
+export type RelatedDocsProps = {
   className?: string
   docs?: Post['relatedDocs']
   introContent?: SerializedEditorState
 }
 
-export const RelatedPosts: React.FC<RelatedPostsProps> = (props) => {
+export const RelatedDocs: React.FC<RelatedDocsProps> = (props) => {
   const { className, docs, introContent } = props
 
   return (
