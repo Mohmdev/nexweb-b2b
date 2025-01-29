@@ -1,7 +1,11 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 //This copy-and-pasted from lexical here: https://github.com/facebook/lexical/blob/c2ceee223f46543d12c574e62155e619f9a18a5d/packages/lexical/src/LexicalConstants.ts
 
-import type { ElementFormatType, TextFormatType } from '@payloadcms/richtext-lexical/lexical'
+import type {
+  ElementFormatType,
+  TextFormatType,
+} from '@payloadcms/richtext-lexical/lexical'
 import type {
   TextDetailType,
   TextModeType,
@@ -64,6 +68,7 @@ export const IS_ALIGN_END = 6
 
 // Reconciliation
 export const NON_BREAKING_SPACE = '\u00A0'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ZERO_WIDTH_SPACE = '\u200b'
 
 export const DOUBLE_LINE_BREAK = '\n\n'
@@ -97,7 +102,10 @@ export const DETAIL_TYPE_TO_DETAIL: Record<TextDetailType | string, number> = {
   unmergeable: IS_UNMERGEABLE,
 }
 
-export const ELEMENT_TYPE_TO_FORMAT: Record<Exclude<ElementFormatType, ''>, number> = {
+export const ELEMENT_TYPE_TO_FORMAT: Record<
+  Exclude<ElementFormatType, ''>,
+  number
+> = {
   center: IS_ALIGN_CENTER,
   end: IS_ALIGN_END,
   justify: IS_ALIGN_JUSTIFY,

@@ -10,7 +10,7 @@ export const contact: Partial<Page> = {
     {
       blockType: 'formBlock',
       enableIntro: true,
-      // @ts-ignore
+      // @ts-expect-error Because this is pre-seeded content
       form: '{{CONTACT_FORM_ID}}',
       introContent: {
         root: {

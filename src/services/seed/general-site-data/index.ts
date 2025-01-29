@@ -1,4 +1,4 @@
-import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
+import type { CollectionSlug, File, GlobalSlug, Payload, PayloadRequest } from 'payload'
 
 import { contactForm as contactFormData } from './contact-form'
 import { contact as contactPageData } from './contact-page'
@@ -57,7 +57,9 @@ export const seed = async ({
   )
 
   await Promise.all(
-    collections.map((collection) => payload.db.deleteMany({ collection, req, where: {} })),
+    collections.map((collection) =>
+      payload.db.deleteMany({ collection, req, where: {} }),
+    ),
   )
 
   await Promise.all(
@@ -244,7 +246,10 @@ export const seed = async ({
       disableRevalidate: true,
     },
     data: JSON.parse(
-      JSON.stringify({ ...post1, categories: [technologyCategory.id] })
+      JSON.stringify({
+        ...post1,
+        categories: [technologyCategory.id, softwareCategory.id],
+      })
         .replace(/"\{\{IMAGE_1\}\}"/g, String(image1ID))
         .replace(/"\{\{IMAGE_2\}\}"/g, String(image2ID))
         .replace(/"\{\{AUTHOR\}\}"/g, String(demoAuthorID)),
@@ -258,7 +263,7 @@ export const seed = async ({
       disableRevalidate: true,
     },
     data: JSON.parse(
-      JSON.stringify({ ...post2, categories: [newsCategory.id] })
+      JSON.stringify({ ...post2, categories: [newsCategory.id, designCategory.id] })
         .replace(/"\{\{IMAGE_1\}\}"/g, String(image2ID))
         .replace(/"\{\{IMAGE_2\}\}"/g, String(image3ID))
         .replace(/"\{\{AUTHOR\}\}"/g, String(demoAuthorID)),
@@ -272,7 +277,10 @@ export const seed = async ({
       disableRevalidate: true,
     },
     data: JSON.parse(
-      JSON.stringify({ ...post3, categories: [financeCategory.id] })
+      JSON.stringify({
+        ...post3,
+        categories: [financeCategory.id, engineeringCategory.id],
+      })
         .replace(/"\{\{IMAGE_1\}\}"/g, String(image3ID))
         .replace(/"\{\{IMAGE_2\}\}"/g, String(image1ID))
         .replace(/"\{\{AUTHOR\}\}"/g, String(demoAuthorID)),
@@ -327,6 +335,7 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding pages...`)
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, contactPage] = await Promise.all([
     payload.create({
       collection: 'pages',

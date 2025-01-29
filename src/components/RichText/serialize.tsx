@@ -1,11 +1,21 @@
+import React, { Fragment, JSX } from 'react'
+
+import {
+  DefaultNodeTypes,
+  SerializedBlockNode,
+} from '@payloadcms/richtext-lexical'
 import { BannerBlock } from '@CMS/blocks/Banner/Component'
 import { CallToActionBlock } from '@CMS/blocks/CallToAction/Component'
 import { CodeBlock, CodeBlockProps } from '@CMS/blocks/Code/Component'
 import { MediaBlock } from '@CMS/blocks/MediaBlock/Component'
-import React, { Fragment, JSX } from 'react'
+
 import { CMSLink } from '@/components/Link'
-import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
-import type { BannerBlock as BannerBlockProps } from '@/payload-types'
+
+import type {
+  BannerBlock as BannerBlockProps,
+  CallToActionBlock as CTABlockProps,
+  MediaBlock as MediaBlockProps,
+} from '@/payload-types'
 
 import {
   IS_BOLD,
@@ -16,14 +26,12 @@ import {
   IS_SUPERSCRIPT,
   IS_UNDERLINE,
 } from './nodeFormat'
-import type {
-  CallToActionBlock as CTABlockProps,
-  MediaBlock as MediaBlockProps,
-} from '@/payload-types'
 
 export type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps>
+  | SerializedBlockNode<
+      CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps
+    >
 
 type Props = {
   nodes: NodeTypes[]
@@ -92,7 +100,8 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
           }
         }
 
-        const serializedChildren = 'children' in node ? serializedChildrenFn(node) : ''
+        const serializedChildren =
+          'children' in node ? serializedChildrenFn(node) : ''
 
         if (node.type === 'block') {
           const block = node.fields
@@ -109,7 +118,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             case 'mediaBlock':
               return (
                 <MediaBlock
-                  className="col-start-1 col-span-3"
+                  className="col-span-3 col-start-1"
                   imgClassName="m-0"
                   key={index}
                   {...block}
@@ -119,9 +128,17 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                 />
               )
             case 'banner':
-              return <BannerBlock className="col-start-2 mb-4" key={index} {...block} />
+              return (
+                <BannerBlock
+                  className="col-start-2 mb-4"
+                  key={index}
+                  {...block}
+                />
+              )
             case 'code':
-              return <CodeBlock className="col-start-2" key={index} {...block} />
+              return (
+                <CodeBlock className="col-start-2" key={index} {...block} />
+              )
             default:
               return null
           }
@@ -160,7 +177,6 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                     aria-checked={node.checked ? 'true' : 'false'}
                     className={` ${node.checked ? '' : ''}`}
                     key={index}
-                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
                     role="checkbox"
                     tabIndex={-1}
                     value={node?.value}
@@ -190,6 +206,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                 <CMSLink
                   key={index}
                   newTab={Boolean(fields?.newTab)}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   reference={fields.doc as any}
                   type={fields.linkType === 'internal' ? 'reference' : 'custom'}
                   url={fields.url}
