@@ -12,8 +12,6 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
         "myaaghubi.andromeda-mariana-vscode",
         "ms-vscode-remote.remote-containers",
         "dsznajder.es7-react-js-snippets",
@@ -42,12 +40,13 @@
         "ms-vscode.remote-explorer",
         "macieklad.tailwind-sass-syntax",
         "vscode-icons-team.vscode-icons",
-        "WakaTime.vscode-wakatime"
+        "WakaTime.vscode-wakatime",
+        "biomejs.biome"
       ]
     }
   },
 
-  "postCreateCommand": "npm install -g pnpm vercel railway",
+  "postCreateCommand": "npm install -g pnpm vercel railway @biomejs/biome@1.9.4",
 
   "remoteUser": "node"
 }

@@ -97,5 +97,10 @@
   },
   "engines": {
     "node": ">=18.20.2 <23.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
   }
 }

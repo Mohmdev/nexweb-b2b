@@ -2,8 +2,8 @@ import React from 'react'
 
 import './index.scss'
 
-import Image from 'next/image'
 import { getCachedGlobal } from '@data/getGlobal'
+import Image from 'next/image'
 
 import { cn } from '@utils/ui'
 
