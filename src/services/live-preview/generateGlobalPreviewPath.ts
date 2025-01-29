@@ -14,7 +14,7 @@ export const generateGlobalPreviewPath = ({ global, slug, req }: Props) => {
   const params = {
     slug,
     global,
-    path
+    path,
   }
 
   const encodedParams = new URLSearchParams()
@@ -23,7 +23,8 @@ export const generateGlobalPreviewPath = ({ global, slug, req }: Props) => {
   })
 
   const isProduction =
-    process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL_PROJECT_PRODUCTION_URL)
+    process.env.NODE_ENV === 'production' ||
+    Boolean(process.env.VERCEL_PROJECT_PRODUCTION_URL)
   const protocol = isProduction ? 'https:' : req.protocol
 
   // This generates the preview URL with query params

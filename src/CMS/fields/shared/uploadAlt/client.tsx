@@ -2,7 +2,14 @@
 
 import React, { useCallback, useEffect } from 'react'
 
-import { Button, FieldLabel, TextInput, useField, useForm, useFormFields } from '@payloadcms/ui'
+import {
+  Button,
+  FieldLabel,
+  TextInput,
+  useField,
+  useForm,
+  useFormFields,
+} from '@payloadcms/ui'
 
 import { TextFieldClientProps } from 'payload'
 
@@ -20,7 +27,7 @@ export const UploadAltComponent: React.FC<UploadAltComponentProps> = ({
   fieldToUse,
   checkboxFieldPath: checkboxFieldPathFromProps,
   path,
-  readOnly: readOnlyFromProps
+  readOnly: readOnlyFromProps,
 }) => {
   const { label } = field
 
@@ -44,7 +51,9 @@ export const UploadAltComponent: React.FC<UploadAltComponentProps> = ({
   })
 
   // Compute formatted alt text for placeholder
-  const formattedAltTextPreview = targetFieldValue ? formatUploadAlt(targetFieldValue) : ''
+  const formattedAltTextPreview = targetFieldValue
+    ? formatUploadAlt(targetFieldValue)
+    : ''
 
   useEffect(() => {
     if (checkboxValue) {
@@ -65,10 +74,10 @@ export const UploadAltComponent: React.FC<UploadAltComponentProps> = ({
       dispatchFields({
         type: 'UPDATE',
         path: checkboxFieldPath,
-        value: !checkboxValue
+        value: !checkboxValue,
       })
     },
-    [checkboxValue, checkboxFieldPath, dispatchFields]
+    [checkboxValue, checkboxFieldPath, dispatchFields],
   )
 
   const readOnly = readOnlyFromProps || checkboxValue

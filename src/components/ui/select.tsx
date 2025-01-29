@@ -12,7 +12,9 @@ const SelectGroup = SelectPrimitive.Group
 const SelectValue = SelectPrimitive.Value
 
 const SelectTrigger: React.FC<
-  { ref?: React.Ref<HTMLButtonElement> } & React.ComponentProps<typeof SelectPrimitive.Trigger>
+  { ref?: React.Ref<HTMLButtonElement> } & React.ComponentProps<
+    typeof SelectPrimitive.Trigger
+  >
 > = ({ children, className, ref, ...props }) => (
   <SelectPrimitive.Trigger
     className={cn(
@@ -30,10 +32,15 @@ const SelectTrigger: React.FC<
 )
 
 const SelectScrollUpButton: React.FC<
-  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>
+  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<
+    typeof SelectPrimitive.ScrollUpButton
+  >
 > = ({ className, ref, ...props }) => (
   <SelectPrimitive.ScrollUpButton
-    className={cn('flex cursor-default items-center justify-center py-1', className)}
+    className={cn(
+      'flex cursor-default items-center justify-center py-1',
+      className,
+    )}
     ref={ref}
     {...props}
   >
@@ -47,7 +54,10 @@ const SelectScrollDownButton: React.FC<
   >
 > = ({ className, ref, ...props }) => (
   <SelectPrimitive.ScrollDownButton
-    className={cn('flex cursor-default items-center justify-center py-1', className)}
+    className={cn(
+      'flex cursor-default items-center justify-center py-1',
+      className,
+    )}
     ref={ref}
     {...props}
   >
@@ -88,7 +98,9 @@ const SelectContent: React.FC<
 )
 
 const SelectLabel: React.FC<
-  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<typeof SelectPrimitive.Label>
+  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<
+    typeof SelectPrimitive.Label
+  >
 > = ({ className, ref, ...props }) => (
   <SelectPrimitive.Label
     className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)}
@@ -121,7 +133,9 @@ const SelectItem: React.FC<
 )
 
 const SelectSeparator: React.FC<
-  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<typeof SelectPrimitive.Separator>
+  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<
+    typeof SelectPrimitive.Separator
+  >
 > = ({ className, ref, ...props }) => (
   <SelectPrimitive.Separator
     className={cn('-mx-1 my-1 h-px bg-muted', className)}

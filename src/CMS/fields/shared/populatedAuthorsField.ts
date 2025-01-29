@@ -8,21 +8,21 @@ export const populateAuthorsField: Field = {
   name: 'populatedAuthors',
   type: 'array',
   access: {
-    update: () => false
+    update: () => false,
   },
   admin: {
     disabled: true,
     readOnly: true,
-    position: 'sidebar'
+    position: 'sidebar',
   },
   fields: [
     {
       name: 'id',
-      type: 'text'
+      type: 'text',
     },
     {
       name: 'name',
-      type: 'text'
-    }
-  ]
+      type: 'text',
+    },
+  ],
 }

@@ -9,7 +9,7 @@ export const publishedOnly: Access = ({ req: { user } }) => {
   // Else true if the status is published
   return {
     _status: {
-      equals: 'published'
-    }
+      equals: 'published',
+    },
   }
 }

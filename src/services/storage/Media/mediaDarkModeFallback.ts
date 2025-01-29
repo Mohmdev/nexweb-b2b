@@ -4,7 +4,7 @@ export const mediaDarkModeFallback: Field = {
   name: 'mediaDarkModeFallback',
   type: 'upload',
   admin: {
-    description: 'Dark variation of the media for dark mode. (Optional)'
+    description: 'Dark variation of the media for dark mode. (Optional)',
   },
-  relationTo: 'media'
+  relationTo: 'media',
 }

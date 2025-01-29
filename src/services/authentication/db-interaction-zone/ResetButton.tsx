@@ -25,7 +25,8 @@ export const ResetButton: React.FC<ResetButtonProps> = ({ user }) => {
   const [error, setError] = useState<Error | null>(null)
 
   const getButtonText = () => {
-    if (user?.role !== 'admin') return 'You need admin access level to perform this action'
+    if (user?.role !== 'admin')
+      return 'You need admin access level to perform this action'
     if (loading) return 'Resetting...'
     if (reset) return 'Database Reset Complete!'
     if (error) return `Error: ${error}`

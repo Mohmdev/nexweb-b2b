@@ -11,8 +11,8 @@ export const isAdminOrEditorOrSelf: Access = ({ req: { user } }) => {
     // If any other type of user, only provide access to themselves
     return {
       id: {
-        equals: user.id
-      }
+        equals: user.id,
+      },
     }
   }
 
@@ -22,7 +22,7 @@ export const isAdminOrEditorOrSelf: Access = ({ req: { user } }) => {
 
 export const isAdminOrEditorOrSelfFieldLevel: FieldAccess = ({
   id,
-  req: { user }
+  req: { user },
 }) => {
   // Return true or false based on if the user has an admin or editor role
   if (user?.role === 'admin' || user?.role === 'editor') return true

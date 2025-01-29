@@ -13,7 +13,7 @@ type GenerateVerificationEmailArgs = {
 }
 
 export const generateVerificationEmail = async (
-  args: GenerateVerificationEmailArgs
+  args: GenerateVerificationEmailArgs,
 ): Promise<string> => {
   const { token, user } = args
 
@@ -21,8 +21,8 @@ export const generateVerificationEmail = async (
     content: `<p>Hi${user.name ? ' ' + user.name : ''}! Validate your account by clicking the button below.</p>`,
     cta: {
       buttonLabel: 'Verify',
-      url: `${getServerSideURL()}/verify?token=${token}&email=${user.email}`
+      url: `${getServerSideURL()}/verify?token=${token}&email=${user.email}`,
     },
-    headline: 'Verify your account | Pikertattoos'
+    headline: 'Verify your account | Pikertattoos',
   })
 }

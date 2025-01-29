@@ -1,5 +1,9 @@
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
-import { lexicalEditor, FixedToolbarFeature, HeadingFeature } from '@payloadcms/richtext-lexical'
+import {
+  lexicalEditor,
+  FixedToolbarFeature,
+  HeadingFeature,
+} from '@payloadcms/richtext-lexical'
 import type { Plugin } from 'payload'
 
 export const formBuilderService: Plugin = formBuilderPlugin({
@@ -17,7 +21,9 @@ export const formBuilderService: Plugin = formBuilderPlugin({
                 return [
                   ...rootFeatures,
                   FixedToolbarFeature(),
-                  HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                  HeadingFeature({
+                    enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'],
+                  }),
                 ]
               },
             }),

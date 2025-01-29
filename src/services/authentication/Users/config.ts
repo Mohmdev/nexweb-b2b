@@ -5,7 +5,10 @@ import { hasAdminPanelAccess } from '@access/access/hasAdminPanelAccess'
 import { isAdminFieldLevel } from '@access/access/isAdmin'
 import { isAdminOrEditor } from '@access/access/isAdminOrEditor'
 import { isAdminOrEditorOrSelf } from '@access/access/isAdminOrEditorOrSelf'
-import { isAdminOrSelf, isAdminOrSelfFieldLevel } from '@access/access/isAdminOrSelf'
+import {
+  isAdminOrSelf,
+  isAdminOrSelfFieldLevel,
+} from '@access/access/isAdminOrSelf'
 
 import type { CollectionConfig } from 'payload'
 
@@ -91,7 +94,8 @@ export const Users: CollectionConfig<'users'> = {
       label: '',
       admin: {
         components: {
-          Field: '@services/authentication/db-interaction-zone/Component#DbInteractionZone',
+          Field:
+            '@services/authentication/db-interaction-zone/Component#DbInteractionZone',
         },
         position: 'sidebar',
       },
@@ -116,7 +120,8 @@ export const Users: CollectionConfig<'users'> = {
     cookies: {
       // HTTPS only cookies
       secure:
-        process.env.NODE_ENV === 'production' && !process.env.DISABLE_SECURE_COOKIE
+        process.env.NODE_ENV === 'production' &&
+        !process.env.DISABLE_SECURE_COOKIE
           ? true // true in production
           : undefined,
       sameSite: 'None', // cross-origin requests

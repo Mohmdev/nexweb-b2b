@@ -25,7 +25,14 @@ export const UserPhotos: CollectionConfig<'user-photos'> = {
   },
   admin: {
     useAsTitle: 'user',
-    defaultColumns: ['user', 'filename', 'filesize', 'mimeType', 'createdAt', 'updatedAt'],
+    defaultColumns: [
+      'user',
+      'filename',
+      'filesize',
+      'mimeType',
+      'createdAt',
+      'updatedAt',
+    ],
   },
   fields: [
     {

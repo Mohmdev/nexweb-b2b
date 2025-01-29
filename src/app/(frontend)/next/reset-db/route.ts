@@ -41,7 +41,9 @@ export async function POST(): Promise<Response> {
     return Response.json({ success: true })
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return new Response(`Script failed to finish; ${error.message}`, { status: 500 })
+      return new Response(`Script failed to finish; ${error.message}`, {
+        status: 500,
+      })
     }
     return new Response('An unknown error occurred', { status: 500 })
   }
@@ -59,13 +61,19 @@ const clearDBScript = async ({
 
     payload.logger.info(`— Clearing collections and globals...`)
     await Promise.all(
-      collections.map((collection) => payload.db.deleteMany({ collection, req, where: {} })),
+      collections.map((collection) =>
+        payload.db.deleteMany({ collection, req, where: {} }),
+      ),
     )
 
     await Promise.all(
       collections
-        .filter((collection) => Boolean(payload.collections[collection].config.versions))
-        .map((collection) => payload.db.deleteVersions({ collection, req, where: {} })),
+        .filter((collection) =>
+          Boolean(payload.collections[collection].config.versions),
+        )
+        .map((collection) =>
+          payload.db.deleteVersions({ collection, req, where: {} }),
+        ),
     )
 
     payload.logger.info('✓ Successfully cleared all data')

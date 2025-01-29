@@ -15,14 +15,14 @@ interface GlobalOptions<T extends Global> {
 
 async function getGlobal<T extends Global>(
   slug: T,
-  { depth = 0, select = {} }: GlobalOptions<T> = {}
+  { depth = 0, select = {} }: GlobalOptions<T> = {},
 ) {
   const payload = await getPayload({ config: configPromise })
 
   const global = await payload.findGlobal({
     slug,
     depth,
-    select
+    select,
   })
 
   return global as Config['globals'][T]
@@ -37,7 +37,10 @@ async function getGlobal<T extends Global>(
  *
  * Returns a unstable_cache function mapped with the cache tag for the slug
  */
-export const getCachedGlobals = <T extends Global>(slug: T, options: GlobalOptions<T> = {}) =>
+export const getCachedGlobals = <T extends Global>(
+  slug: T,
+  options: GlobalOptions<T> = {},
+) =>
   unstable_cache(async () => getGlobal(slug, options), [slug], {
-    tags: [`globals_${slug}`]
+    tags: [`globals_${slug}`],
   })

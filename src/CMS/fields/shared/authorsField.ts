@@ -5,13 +5,13 @@ export const authorsField: Field = {
   name: 'authors',
   label: {
     singular: 'Author',
-    plural: 'Authors'
+    plural: 'Authors',
   },
   type: 'relationship',
   admin: {
-    position: 'sidebar'
+    position: 'sidebar',
   },
   hasMany: true,
-  relationTo: 'users'
+  relationTo: 'users',
   // required: true
 }

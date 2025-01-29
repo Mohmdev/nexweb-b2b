@@ -38,7 +38,13 @@ export const Pages: CollectionConfig<'pages'> = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'populatedAuthors', 'slug', 'updatedAt', 'createdAt'],
+    defaultColumns: [
+      'title',
+      'populatedAuthors',
+      'slug',
+      'updatedAt',
+      'createdAt',
+    ],
     livePreview: getLivePreviewUrl('pages'),
     preview: getPreviewUrl('pages'),
   },

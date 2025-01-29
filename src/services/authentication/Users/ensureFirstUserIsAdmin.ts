@@ -9,13 +9,13 @@ import type { FieldHook } from 'payload'
 export const ensureFirstUserIsAdmin: FieldHook<User> = async ({
   operation,
   req,
-  value
+  value,
 }) => {
   if (operation === 'create') {
     const users = await req.payload.find({
       collection: 'users',
       depth: 0,
-      limit: 0
+      limit: 0,
     })
     if (users.totalDocs === 0) {
       // If no users exist and role is not set to admin, make them admin

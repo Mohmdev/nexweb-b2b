@@ -1,4 +1,10 @@
-import type { CollectionSlug, File, GlobalSlug, Payload, PayloadRequest } from 'payload'
+import type {
+  CollectionSlug,
+  File,
+  GlobalSlug,
+  Payload,
+  PayloadRequest,
+} from 'payload'
 
 import { contactForm as contactFormData } from './contact-form'
 import { contact as contactPageData } from './contact-page'
@@ -64,8 +70,12 @@ export const seed = async ({
 
   await Promise.all(
     collections
-      .filter((collection) => Boolean(payload.collections[collection].config.versions))
-      .map((collection) => payload.db.deleteVersions({ collection, req, where: {} })),
+      .filter((collection) =>
+        Boolean(payload.collections[collection].config.versions),
+      )
+      .map((collection) =>
+        payload.db.deleteVersions({ collection, req, where: {} }),
+      ),
   )
 
   payload.logger.info(`— Seeding demo author and user...`)
@@ -82,20 +92,21 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding media...`)
 
-  const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] = await Promise.all([
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
-    ),
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post2.webp',
-    ),
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post3.webp',
-    ),
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-hero1.webp',
-    ),
-  ])
+  const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] =
+    await Promise.all([
+      fetchFileByURL(
+        'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
+      ),
+      fetchFileByURL(
+        'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post2.webp',
+      ),
+      fetchFileByURL(
+        'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post3.webp',
+      ),
+      fetchFileByURL(
+        'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-hero1.webp',
+      ),
+    ])
 
   const [
     demoAuthor,
@@ -263,7 +274,10 @@ export const seed = async ({
       disableRevalidate: true,
     },
     data: JSON.parse(
-      JSON.stringify({ ...post2, categories: [newsCategory.id, designCategory.id] })
+      JSON.stringify({
+        ...post2,
+        categories: [newsCategory.id, designCategory.id],
+      })
         .replace(/"\{\{IMAGE_1\}\}"/g, String(image2ID))
         .replace(/"\{\{IMAGE_2\}\}"/g, String(image3ID))
         .replace(/"\{\{AUTHOR\}\}"/g, String(demoAuthorID)),

@@ -15,7 +15,10 @@ export const collectionGroup = (
   })
 }
 
-export const globalGroup = (group: string, globals: GlobalConfig[]): GlobalConfig[] => {
+export const globalGroup = (
+  group: string,
+  globals: GlobalConfig[],
+): GlobalConfig[] => {
   return globals.map((global) => {
     return {
       ...global,

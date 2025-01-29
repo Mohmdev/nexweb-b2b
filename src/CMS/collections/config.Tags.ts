@@ -20,7 +20,14 @@ export const Tags: CollectionConfig<'tags'> = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['image', 'title', 'pages', 'posts', 'createdAt', 'updatedAt'],
+    defaultColumns: [
+      'image',
+      'title',
+      'pages',
+      'posts',
+      'createdAt',
+      'updatedAt',
+    ],
   },
   defaultPopulate: {
     title: true,

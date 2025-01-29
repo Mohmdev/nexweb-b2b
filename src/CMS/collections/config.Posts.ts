@@ -40,7 +40,13 @@ export const Posts: CollectionConfig<'posts'> = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'populatedAuthors', 'slug', 'updatedAt', 'createdAt'],
+    defaultColumns: [
+      'title',
+      'populatedAuthors',
+      'slug',
+      'updatedAt',
+      'createdAt',
+    ],
     livePreview: getLivePreviewUrl('posts'),
     preview: getPreviewUrl('posts'),
   },

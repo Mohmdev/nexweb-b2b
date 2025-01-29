@@ -28,12 +28,12 @@ export const generateMeta = async (args: {
       siteName: siteName,
       title: siteName,
       description: siteDescription,
-      images: ogImage ? [{ url: ogImage }] : undefined
+      images: ogImage ? [{ url: ogImage }] : undefined,
     },
     {
       siteName,
-      description: siteDescription
-    }
+      description: siteDescription,
+    },
   )
 
   // Special handling for homepage
@@ -43,8 +43,8 @@ export const generateMeta = async (args: {
       description: siteDescription,
       openGraph: {
         ...openGraphBase,
-        url: '/'
-      }
+        url: '/',
+      },
     }
   }
 
@@ -56,8 +56,8 @@ export const generateMeta = async (args: {
         ...openGraphBase,
         title: `Blog | ${siteName}`,
         description: 'Browse all posts.',
-        url: '/blog'
-      }
+        url: '/blog',
+      },
     }
   }
 
@@ -69,13 +69,15 @@ export const generateMeta = async (args: {
         ...openGraphBase,
         title: `Search | ${siteName}`,
         description: 'Search across our site',
-        url: '/search'
-      }
+        url: '/search',
+      },
     }
   }
 
   // All other docs
-  const documentTitle = doc?.meta?.title ? `${doc.meta.title} | ${siteName}` : siteName
+  const documentTitle = doc?.meta?.title
+    ? `${doc.meta.title} | ${siteName}`
+    : siteName
   const documentDescription = doc?.meta?.description || siteDescription
   const documentUrl = doc?.slug
     ? Array.isArray(doc.slug)
@@ -92,7 +94,7 @@ export const generateMeta = async (args: {
       ...openGraphBase,
       title: documentTitle,
       description: documentDescription,
-      url: documentUrl
-    }
+      url: documentUrl,
+    },
   }
 }

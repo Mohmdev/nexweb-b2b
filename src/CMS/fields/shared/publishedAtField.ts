@@ -5,9 +5,9 @@ export const publishedAtField: Field = {
   type: 'date',
   admin: {
     date: {
-      pickerAppearance: 'dayAndTime'
+      pickerAppearance: 'dayAndTime',
     },
-    position: 'sidebar'
+    position: 'sidebar',
   },
   hooks: {
     beforeChange: [
@@ -16,7 +16,7 @@ export const publishedAtField: Field = {
           return new Date()
         }
         return value
-      }
-    ]
-  }
+      },
+    ],
+  },
 }

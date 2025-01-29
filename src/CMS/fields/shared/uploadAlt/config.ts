@@ -7,7 +7,10 @@ type Overrides = {
   checkboxOverrides?: Partial<CheckboxField>
 }
 
-type Alt = (fieldToUse?: string, overrides?: Overrides) => [TextField, CheckboxField]
+type Alt = (
+  fieldToUse?: string,
+  overrides?: Overrides,
+) => [TextField, CheckboxField]
 
 export const uploadAltField: Alt = (fieldToUse = 'title', overrides = {}) => {
   const { altOverrides, checkboxOverrides } = overrides
@@ -17,9 +20,9 @@ export const uploadAltField: Alt = (fieldToUse = 'title', overrides = {}) => {
     type: 'checkbox',
     defaultValue: false, // Changed from true to false
     admin: {
-      hidden: true
+      hidden: true,
     },
-    ...checkboxOverrides
+    ...checkboxOverrides,
   }
 
   // @ts-expect-error: Expect ts error here because of typescript mismatching Partial<TextField> with TextField
@@ -32,7 +35,7 @@ export const uploadAltField: Alt = (fieldToUse = 'title', overrides = {}) => {
     ...(altOverrides || {}),
     hooks: {
       // Kept this in for hook or API based updates
-      beforeValidate: [formatUploadAltHook(fieldToUse)]
+      beforeValidate: [formatUploadAltHook(fieldToUse)],
     },
     admin: {
       // TODO: Make tooltip for alt text
@@ -43,11 +46,11 @@ export const uploadAltField: Alt = (fieldToUse = 'title', overrides = {}) => {
           path: '@fields/shared/uploadAlt/client#UploadAltComponent',
           clientProps: {
             fieldToUse,
-            checkboxFieldPath: checkBoxField.name
-          }
-        }
-      }
-    }
+            checkboxFieldPath: checkBoxField.name,
+          },
+        },
+      },
+    },
   }
 
   return [uploadAltField, checkBoxField]

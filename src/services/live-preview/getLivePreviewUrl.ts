@@ -2,7 +2,9 @@ import { generateCollectionPreviewPath } from '@services/live-preview/generateCo
 
 import type { CollectionSlug, LivePreviewConfig } from 'payload'
 
-export const getLivePreviewUrl = (collection: CollectionSlug): LivePreviewConfig => ({
+export const getLivePreviewUrl = (
+  collection: CollectionSlug,
+): LivePreviewConfig => ({
   url: ({ data, req }) => {
     const path = generateCollectionPreviewPath({
       slug: typeof data?.slug === 'string' ? data.slug : '',

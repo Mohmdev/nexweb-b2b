@@ -8,6 +8,6 @@ export const noindexField: Field = {
     position: 'sidebar',
     // TODO: Make the description a tooltip
     description:
-      'When checked, this page will not appear in search engines like Google. Use this for private pages or temporary content that should not be publicly searchable.'
-  }
+      'When checked, this page will not appear in search engines like Google. Use this for private pages or temporary content that should not be publicly searchable.',
+  },
 }

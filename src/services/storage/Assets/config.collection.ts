@@ -28,7 +28,13 @@ export const Assets: CollectionConfig<'assets'> = {
   },
   admin: {
     useAsTitle: 'alt',
-    defaultColumns: ['filename', 'mimeType', 'filesize', 'createdAt', 'updatedAt'],
+    defaultColumns: [
+      'filename',
+      'mimeType',
+      'filesize',
+      'createdAt',
+      'updatedAt',
+    ],
   },
   fields: [
     {

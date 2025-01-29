@@ -17,9 +17,9 @@ export const getDynamicMeta = async (): Promise<DynamicMeta> => {
       branding: { favicon: true },
       siteIdentity: {
         siteName: true,
-        siteDescription: true
-      }
-    }
+        siteDescription: true,
+      },
+    },
   })()
 
   const { siteName: cachedSiteName, siteDescription: cachedSiteDescription } =
@@ -28,10 +28,11 @@ export const getDynamicMeta = async (): Promise<DynamicMeta> => {
 
   return {
     siteName: cachedSiteName || 'Nexweb',
-    siteDescription: cachedSiteDescription || 'Nexweb Content Management Systems',
+    siteDescription:
+      cachedSiteDescription || 'Nexweb Content Management Systems',
     favicon:
       favicon && typeof favicon === 'object' && 'url' in favicon && favicon.url
         ? { url: favicon.url }
-        : undefined
+        : undefined,
   }
 }

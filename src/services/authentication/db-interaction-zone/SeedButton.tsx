@@ -25,7 +25,8 @@ export const SeedButton: React.FC<SeedButtonProps> = ({ user }) => {
   const [error, setError] = useState<Error | null>(null)
 
   const getButtonText = () => {
-    if (user?.role !== 'admin') return 'You need admin access level to perform this action'
+    if (user?.role !== 'admin')
+      return 'You need admin access level to perform this action'
     if (loading) return 'Seeding...'
     if (seeded) return 'Database Seeded!'
     if (error) return `Error: ${error}`

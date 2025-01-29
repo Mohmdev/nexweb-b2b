@@ -6,9 +6,19 @@ export const DASHBOARD_SLUG = 'dashboard'
 export const SITE_NAME_SHORT = 'Nexweb' as const
 export const SITE_NAME = 'Nexweb Studio' as const
 
-export const LINKABLE_COLLECTIONS: CollectionSlug[] = ['pages', 'posts'] as const
-export const PREVIEWABLE_COLLECTIONS: CollectionSlug[] = ['pages', 'posts'] as const
-export const RELATABLE_COLLECTIONS: CollectionSlug[] = ['pages', 'posts', 'categories'] as const
+export const LINKABLE_COLLECTIONS: CollectionSlug[] = [
+  'pages',
+  'posts',
+] as const
+export const PREVIEWABLE_COLLECTIONS: CollectionSlug[] = [
+  'pages',
+  'posts',
+] as const
+export const RELATABLE_COLLECTIONS: CollectionSlug[] = [
+  'pages',
+  'posts',
+  'categories',
+] as const
 export type RELATABLE_COLLECTIONS_TYPES = 'posts'
 
 export const ENABLED_PLUGINS = {
@@ -21,7 +31,10 @@ export const ENABLED_PLUGINS = {
 } as const
 
 /* ----------------------------------- SEO ---------------------------------- */
-export const SEO_ENABLED_COLLECTIONS: CollectionSlug[] = ['pages', 'posts'] as const
+export const SEO_ENABLED_COLLECTIONS: CollectionSlug[] = [
+  'pages',
+  'posts',
+] as const
 export const SEO_ENABLED_GLOBALS: GlobalSlug[] = [
   // 'get-started',
   // 'home-page',
@@ -30,7 +43,10 @@ export const SEO_ENABLED_GLOBALS: GlobalSlug[] = [
 export const INDEXED_COLLECTIONS: CollectionSlug[] = ['posts'] as const
 export const INDEXED_TAXONOMY_COLLECTIONS: CollectionSlug[] = [] as const
 /* -------------------------------- Redirects ------------------------------- */
-export const REDIRECTABLE_COLLECTIONS: CollectionSlug[] = ['pages', 'posts'] as const
+export const REDIRECTABLE_COLLECTIONS: CollectionSlug[] = [
+  'pages',
+  'posts',
+] as const
 /* ------------------------------- Nested Docs ------------------------------ */
 export const NESTED_COLLECTIONS: CollectionSlug[] = ['categories'] as const
 /* ------------------------------- Page Blocks ------------------------------ */

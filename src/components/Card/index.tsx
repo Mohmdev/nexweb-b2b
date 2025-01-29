@@ -19,12 +19,19 @@ export const Card: React.FC<{
   title?: string
 }> = (props) => {
   const { card, link } = useClickableCard({})
-  const { className, doc, relationTo, showCategories, title: titleFromProps } = props
+  const {
+    className,
+    doc,
+    relationTo,
+    showCategories,
+    title: titleFromProps,
+  } = props
 
   const { slug, categories, meta, title } = doc || {}
   const { description, image: metaImage } = meta || {}
 
-  const hasCategories = categories && Array.isArray(categories) && categories.length > 0
+  const hasCategories =
+    categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`
@@ -39,7 +46,9 @@ export const Card: React.FC<{
     >
       <div className="relative w-full ">
         {!metaImage && <div className="">No image</div>}
-        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
+        {metaImage && typeof metaImage !== 'string' && (
+          <Media resource={metaImage} size="33vw" />
+        )}
       </div>
       <div className="p-4">
         {showCategories && hasCategories && (
@@ -50,7 +59,8 @@ export const Card: React.FC<{
                   if (typeof category === 'object') {
                     const { title: titleFromCategory } = category
 
-                    const categoryTitle = titleFromCategory || 'Untitled category'
+                    const categoryTitle =
+                      titleFromCategory || 'Untitled category'
 
                     const isLast = index === categories.length - 1
 
@@ -77,7 +87,11 @@ export const Card: React.FC<{
             </h3>
           </div>
         )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+        {description && (
+          <div className="mt-2">
+            {description && <p>{sanitizedDescription}</p>}
+          </div>
+        )}
       </div>
     </article>
   )

@@ -4,7 +4,10 @@ import { getCachedGlobal } from '@data/getGlobal'
 import type { Asset, GlobalSetting } from '@payload-types'
 
 const Favicon: React.FC = async () => {
-  const graphics = (await getCachedGlobal('global-settings', 1)()) as GlobalSetting
+  const graphics = (await getCachedGlobal(
+    'global-settings',
+    1,
+  )()) as GlobalSetting
   const favicon = (graphics?.branding?.logoSquare as Asset) ?? undefined
 
   return (
@@ -24,8 +27,16 @@ const Favicon: React.FC = async () => {
         </>
       ) : (
         <>
-          <link href="/src/services/admin/Favicon/favicon.svg" rel="icon" type="image/svg+xml" />
-          <link href="/src/services/admin/Favicon/favicon.ico" rel="icon" sizes="32x32" />
+          <link
+            href="/src/services/admin/Favicon/favicon.svg"
+            rel="icon"
+            type="image/svg+xml"
+          />
+          <link
+            href="/src/services/admin/Favicon/favicon.ico"
+            rel="icon"
+            sizes="32x32"
+          />
         </>
       )}
     </>

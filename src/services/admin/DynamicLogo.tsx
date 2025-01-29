@@ -64,7 +64,10 @@ export const SquareLogo = ({ graphics }: { graphics?: Asset }) => {
 }
 
 export const NavbarLogo: React.FC = async () => {
-  const graphics = (await getCachedGlobal('global-settings', 1)()) as GlobalSetting
+  const graphics = (await getCachedGlobal(
+    'global-settings',
+    1,
+  )()) as GlobalSetting
   const logoSquare = (graphics?.branding?.logoSquare as Asset) ?? undefined
 
   return (
@@ -74,7 +77,10 @@ export const NavbarLogo: React.FC = async () => {
   )
 }
 export const MainLogo: React.FC = async () => {
-  const graphics = (await getCachedGlobal('global-settings', 1)()) as GlobalSetting
+  const graphics = (await getCachedGlobal(
+    'global-settings',
+    1,
+  )()) as GlobalSetting
   const logo = (graphics?.branding?.logo as Asset) ?? undefined
 
   return (
