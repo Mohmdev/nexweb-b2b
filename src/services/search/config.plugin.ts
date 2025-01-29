@@ -1,6 +1,6 @@
+import { searchPlugin } from '@payloadcms/plugin-search'
 import { beforeSyncWithSearch } from '@services/search/beforeSync'
 import { searchFields } from '@services/search/fieldOverrides'
-import { searchPlugin } from '@payloadcms/plugin-search'
 
 import type { Plugin } from 'payload'
 
@@ -10,6 +10,9 @@ export const searchService: Plugin = searchPlugin({
   searchOverrides: {
     fields: ({ defaultFields }) => {
       return [...defaultFields, ...searchFields]
+    },
+    admin: {
+      group: 'Settings',
     },
   },
 })

@@ -1,0 +1,62 @@
+.list-controls__wrap {
+  background-color: var(--bg-default-primary);
+  border: 1px solid var(--border-ui);
+
+  @media (max-width: 1024px) {
+    background-color: transparent;
+    border: 0;
+  }
+
+  @media (max-width: 768px) {
+    .list-controls__buttons-wrap .pill {
+      background-color: var(--bg-default-primary);
+      border: 1px solid var(--border-ui);
+    }
+
+    .search-filter {
+      background-color: var(--bg-default-primary);
+      border: 1px solid var(--border-ui);
+      border-radius: 3px;
+    }
+  }
+
+  .search-filter__input {
+    background-color: transparent;
+  }
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: var(--bg-default-primary);
+}
+
+.column-selector {
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+
+  @media (max-width: 1024px) {
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+  }
+
+  .column-selector__column {
+    background-color: var(--bg-default-primary);
+    box-shadow: none;
+    border: 1px solid var(--border-ui);
+  }
+}
+
+.where-builder {
+  background: transparent;
+  padding: 0;
+}
+
+.file__filename {
+  display: none;
+}
+.collection-list--media .file__filename,
+.collection-list--assets .file__filename,
+.collection-list--user-photo .file__filename {
+  display: block;
+}

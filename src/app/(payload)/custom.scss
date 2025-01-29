@@ -1,1 +1,10 @@
-@use '../../styles/admin/components/db-interaction-zone.scss';
+@use '../../styles/admin/views.dashboard.scss' as views-dashboard;
+@use '../../styles/admin/views.edit.scss' as views-edit;
+@use '../../styles/admin/views.list.scss' as views-list;
+@use '../../styles/admin/header.scss';
+@use '../../styles/admin/sidebar.scss';
+@use '../../styles/admin/buttons.scss';
+@use '../../styles/admin/components.scss';
+@use '../../styles/admin/fields.scss';
+@use '../../styles/admin/misc.scss';
+@use '../../styles/admin/_vars.scss';

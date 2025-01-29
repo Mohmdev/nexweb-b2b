@@ -1,0 +1,57 @@
+.nav__wrap {
+  .nav-group {
+    &.Studio {
+      order: 1;
+      // margin-bottom: 1.5rem;
+    }
+    &.Content {
+      order: 2;
+      // margin-top: 1rem;
+      // margin-bottom: 1.5rem;
+    }
+    &.Customize {
+      order: 3;
+    }
+    &.Uploads {
+      order: 20;
+    }
+    &.Settings {
+      order: 30;
+    }
+  }
+  // controls is a direct child with just nav__controls class
+  > .nav__controls {
+    order: 99;
+  }
+}
+
+.nav nav a {
+  font-size: 1rem;
+  line-height: 1.825rem;
+
+  @media (max-width: 1024px) {
+    font-size: 1.125rem;
+    line-height: 1.825rem;
+  }
+}
+
+aside {
+  background-color: var(--sidebar-bg);
+  border-right: solid 1px var(--border-ui);
+  max-height: 100vh;
+  max-height: 100dvh;
+
+  .nav__wrap {
+    margin-bottom: 3rem;
+  }
+}
+
+.nav-group__label {
+  font-size: 1.125rem;
+  line-height: 2.25rem;
+
+  @media (max-width: 1024px) {
+    font-size: 1.225rem;
+    line-height: 2.25rem;
+  }
+}

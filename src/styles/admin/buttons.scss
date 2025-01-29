@@ -1,0 +1,64 @@
+[data-theme='light'] {
+  --bg-disabled: hsl(217 15% 76%);
+  --color-disabled: hsl(218 21% 95%);
+}
+
+[data-theme='dark'] {
+  --bg-disabled: hsl(203 12% 17%);
+  --color-disabled: hsl(207 10% 30%);
+}
+
+:root {
+  --button-bg-disabled: var(--bg-disabled);
+  --button-color-disabled: var(--color-disabled);
+}
+
+.btn {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  font-weight: 400;
+}
+
+.btn--style-primary {
+  box-shadow: none;
+  border: 1px solid var(--border-ui);
+  color: light-dark(hsl(0 0% 100%), var(--text-default));
+  background-color: light-dark(hsl(204 21% 50%), hsl(198 38% 15%));
+}
+
+.btn--style-secondary {
+  background-color: var(--bg-default-secondary);
+  border: 1px solid var(--border-ui);
+  box-shadow: none;
+  color: light-dark(hsl(198 11% 30%), hsl(225 19% 87%));
+}
+
+.btn--disabled {
+  pointer-events: none;
+  color: var(--button-color-disabled);
+  background-color: var(--button-bg-disabled);
+  border-color: var(--button-bg-disabled);
+}
+
+.btn--style-pill,
+.pill {
+  background-color: var(--bg-default-primary);
+  border: 1px solid var(--border-ui);
+}
+
+.list-controls__buttons-wrap {
+  .btn--style-pill,
+  .pill {
+    background: transparent;
+    border: none;
+
+    @media (max-width: 1024px) {
+      background-color: var(--bg-default-primary);
+      border: 1px solid var(--border-ui);
+    }
+  }
+}
+
+.nav__log-out {
+  color: var(--theme-elevation-500);
+}

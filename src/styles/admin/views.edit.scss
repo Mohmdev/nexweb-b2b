@@ -1,0 +1,125 @@
+.doc-header {
+  background-color: unset;
+  // margin-top: 0;
+
+  @media (max-width: 1024px) {
+    padding-inline: var(--gutter-h);
+    border-bottom: solid 1px var(--border-ui);
+    // background-color: var(--bg-default-primary);
+    // padding-top: 5px;
+    // padding-bottom: 0;
+  }
+
+  // Document control tabs
+  .doc-tab__link {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .doc-tab {
+    font-weight: inherit;
+    &::before {
+      background-color: light-dark(hsl(211 12% 94%), hsl(211 12% 19%));
+      border: 1px solid;
+      border-color: light-dark(hsl(211 12% 94%), hsl(211 12% 19%));
+      top: -1px;
+      left: -1px;
+    }
+  }
+  .doc-tab--active {
+    font-weight: inherit;
+    &::before {
+      background-color: light-dark(hsl(211 12% 94%), var(--bg-default-primary));
+      border: 1px solid;
+      border-color: light-dark(hsl(211 12% 94%), var(--border-ui));
+    }
+  }
+
+  .doc-tab__count {
+    text-align: center;
+    background-color: unset;
+    text-decoration: underline;
+    border-radius: var(--style-radius-s);
+  }
+}
+
+.document-fields__main {
+  @media (max-width: 1024px) {
+    padding-block: var(--gutter-h);
+  }
+}
+
+// Document controls
+.doc-controls {
+  background-color: var(--bg-default-primary);
+  border: 0;
+  border-top: 1px solid light-dark(transparent, var(--border-ui));
+  box-shadow: 0 -2px 5px -1px light-dark(hsl(217deg 23% 85% / 12%), transparent);
+
+  button {
+    padding-block: 1px !important;
+  }
+
+  @media (max-width: 1024px) {
+    // border: 0;
+    border-top: 1px solid var(--border-ui);
+    position: fixed;
+    bottom: 0;
+    top: unset;
+    left: 0;
+    right: 0;
+  }
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  .doc-controls__wrapper {
+    .doc-controls__content {
+      @media (max-width: 1024px) {
+        padding-block: 5px;
+      }
+    }
+    .doc-controls__controls-wrapper {
+      @media (max-width: 1024px) {
+        background-color: unset;
+        // border: 0;
+        border-top: 1px solid var(--border-ui);
+      }
+    }
+  }
+
+  .doc-controls__divider {
+    background-color: var(--border-ui);
+  }
+
+  .doc-controls__controls::after {
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+}
+
+.document-fields__sidebar-wrap {
+  border-left: 1px solid var(--border-ui);
+  border-radius: 0;
+
+  // background-color: var(--secondary-sidebar-bg);
+  @media (max-width: 1024px) {
+    padding-bottom: 40px;
+    background-color: transparent;
+    border: none;
+  }
+}
+.document-fields__sidebar {
+  padding-bottom: 100px;
+  overflow: visible;
+}
+
+.document-fields__edit {
+  border: none;
+}

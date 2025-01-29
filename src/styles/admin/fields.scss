@@ -1,0 +1,36 @@
+.react-select {
+  //   .rs__control {
+
+  //   }
+
+  .rs__menu {
+    background-color: hsl(240 10% 3.9%);
+    border-radius: 6px;
+    margin-top: 4px;
+    border: 1px solid hsl(240 10% 15.9%);
+
+    .rs__menu-list {
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      .rs__group {
+        border-bottom: 1px solid hsl(240 10% 15.9%);
+
+        .rs__group-heading {
+          font-weight: 600;
+
+          margin: 0;
+          padding-block: 0.5em;
+
+          background: linear-gradient(
+            to right,
+            hsla(var(--theme-gray) / 0.08),
+            hsla(var(--theme-gray) / 0.02)
+          );
+
+          border-bottom: 1px solid hsl(240 10% 15.9%);
+        }
+      }
+    }
+  }
+}

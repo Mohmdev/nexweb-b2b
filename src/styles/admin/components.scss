@@ -1,0 +1,73 @@
+/* ------------------------------ Dropdown Menu ----------------------------- */
+.popup--active .popup__content {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  border: 1px solid var(--border-ui);
+  transition:
+    opacity 0.2s ease-out,
+    visibility 0.2s ease-out,
+    transform 0.2s ease-out;
+}
+/* --------------------------------- Upload --------------------------------- */
+.dropzone {
+  background: transparent;
+  border: 1px dashed var(--border-ui);
+  border-radius: var(--style-radius-s);
+  box-shadow: 0 0 0 0 transparent;
+  transition: all 0.1s cubic-bezier(0, 0.2, 0.2, 1);
+}
+.file-details {
+  border: 1px solid var(--border-ui);
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--bg-default-primary);
+  padding: 2px;
+
+  header {
+    @media (max-width: 1024px) {
+      flex-wrap: nowrap;
+    }
+  }
+
+  .thumbnail {
+    border: 1px solid var(--border-ui);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 1024px) {
+  .file-details .thumbnail {
+    width: 50%;
+    order: 1;
+  }
+}
+/* ------------------------------- Auth fields ------------------------------ */
+.auth-fields {
+  border: 1px solid var(--border-ui);
+  background-color: var(--bg-default-primary);
+
+  // .field-type.email input {
+  //   background-color: var(--bg-default-secondary);
+  // }
+  //  #field-password, #field-firstName, #field-lastName,
+  #field-email,
+  #field-username {
+    background-color: var(--bg-default-secondary);
+  }
+}
+
+/* ------------------------------- Breadcrumbs ------------------------------ */
+.collapsible--style-default {
+  background-color: var(--bg-default-primary);
+  border: 1px solid var(--border-ui);
+
+  .collapsible__content {
+    background-color: transparent;
+  }
+}
+.array-field__add-row {
+  background: transparent !important;
+  padding: 0 !important;
+}

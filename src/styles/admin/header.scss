@@ -1,0 +1,17 @@
+.app-header {
+  background-color: unset;
+  // @media (max-width: 1024px) {
+  //   background-color: var(--bg-default-primary);
+  // }
+
+  .step-nav {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--base) / 2);
+  }
+}
+
+// Admin Avatar
+.app-header__account {
+  text-decoration: none;
+}

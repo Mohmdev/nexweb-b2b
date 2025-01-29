@@ -1,0 +1,61 @@
+.dashboard__wrap {
+  --card-list-height: 8rem;
+  --margin-block: 1.125rem;
+
+  .dashboard__group {
+    // 1. Custom Content
+    &:nth-of-type(1) {
+      order: 1;
+      margin-block: var(--margin-block);
+
+      .dashboard__card-list {
+        min-height: var(--card-list-height);
+      }
+    }
+
+    // 2. Content
+    &:nth-of-type(2) {
+      order: 2;
+      margin-block: var(--margin-block);
+
+      .dashboard__card-list {
+        min-height: var(--card-list-height);
+      }
+    }
+
+    // 3. Uploads (hidden)
+    &:nth-of-type(3) {
+      order: 10;
+      display: none;
+    }
+
+    // 4. Settings (hidden)
+    &:nth-of-type(4) {
+      order: 20;
+      display: none;
+    }
+
+    // 5. Customize
+    &:nth-of-type(5) {
+      order: 2;
+      margin-block: var(--margin-block);
+
+      .dashboard__card-list {
+        min-height: var(--card-list-height);
+      }
+    }
+  }
+}
+
+// Dashboard main wrapper
+.template-default__wrap {
+  background-color: var(--dashboard-bg);
+  color: var(--theme-text);
+  font-family: var(--font-body);
+}
+
+.card {
+  background-color: var(--dashboard-card-bg);
+  border: 1px solid var(--border-ui);
+  border-radius: 5px;
+}

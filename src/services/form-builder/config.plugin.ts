@@ -1,8 +1,8 @@
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import {
-  lexicalEditor,
   FixedToolbarFeature,
   HeadingFeature,
+  lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import type { Plugin } from 'payload'
 
@@ -31,6 +31,14 @@ export const formBuilderService: Plugin = formBuilderPlugin({
         }
         return field
       })
+    },
+    admin: {
+      group: 'Settings',
+    },
+  },
+  formSubmissionOverrides: {
+    admin: {
+      group: 'Settings',
     },
   },
 })

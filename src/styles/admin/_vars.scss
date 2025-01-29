@@ -1,0 +1,65 @@
+[data-theme='light'] {
+  --color-base-50: #f5f5f5;
+  --theme-elevation-0: var(--color-base-0);
+  --theme-elevation-50: var(--color-base-50);
+  --border: hsl(220 13% 91% / 1);
+
+  --space-bg: hsl(0, 0%, 96%);
+  --space-bg-less: 0, 0%, 100%;
+  --deep-blue: 232.12 13% 98%;
+
+  --theme-black: 240 10% 4%;
+  --theme-gray: 240 4% 16%;
+  --theme-dark-gray: 240 4% 16%;
+  --theme-text-gray: 20 4% 69%;
+  --theme-text-white: 13 47% 94%;
+}
+
+[data-theme='dark'] {
+  --space-bg: hsl(224 71.4% 4.1%);
+  --space-bg-less: 224 11% 6%;
+  --deep-blue: 220 14% 8%;
+  --border: hsl(240 10% 92% / 10%);
+
+  --theme-elevation-0: hsl(240, 10%, 2%);
+  --theme-elevation-50: hsl(240, 10%, 3%);
+  --theme-elevation-100: hsl(240, 10%, 8%);
+  --theme-elevation-150: hsl(240, 10%, 13%);
+
+  --theme-black: 240 10% 4%;
+  --theme-gray: 240 4% 16%;
+  --theme-dark-gray: 240 4% 16%;
+  --theme-text-gray: 20 4% 69%;
+  --theme-text-white: 13 47% 94%;
+}
+
+:root {
+  --bg-default-primary: hsl(var(--deep-blue));
+  --bg-default-secondary: hsl(var(--space-bg-less));
+  --border-ui: var(--border);
+  --text-default: var(--theme-elevation-800);
+
+  --theme-bg: var(--bg-default-secondary);
+  --sidebar-bg: var(--bg-default-primary);
+  --secondary-sidebar-bg: var(--bg-default-primary);
+  --dashboard-bg: var(--bg-default-secondary);
+  --dashboard-card-bg: var(--bg-default-primary);
+  --doc-controls-bg: var(--bg-default-primary);
+
+
+  /* ----------------------------------- // ----------------------------------- */
+
+  --font-body: 'Poppins', Tahoma, Geneva, sans-serif;
+  --theme-input-bg: hsl(var(--deep-blue));
+  --theme-text: var(--text-default);
+  --theme-overlay: rgba(5, 5, 5, 0.5);
+  --theme-border-color: var(--border-ui);
+  --theme-error-500: hsl(-4 95% 47% / 1);
+
+  // --font-mono: monospace;
+  // --font-serif: 'Merriweather', serif;
+  // --style-radius-s: 4px;
+  // --style-radius-m: 8px;
+  // --style-radius-l: 16px;
+  // --nav-width: 224px;
+}
