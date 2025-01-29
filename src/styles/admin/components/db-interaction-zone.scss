@@ -1,0 +1,54 @@
+.db-interaction-zone {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 80px;
+  gap: 1rem;
+}
+
+.seedButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+
+  min-height: 2.4rem;
+  margin-block: 1rem;
+  padding: 0.5rem 1rem;
+
+  background-color: var(--bg-default-primary);
+  border: 1px solid var(--border-ui);
+  border-radius: 0.375rem;
+  transition: opacity 250ms;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+  color: light-dark(var(--theme-text), var(--color-base-150));
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 0.825rem;
+  width: 100%;
+  font-weight: 400;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--theme-text);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.8;
+    color: var(--theme-error-500);
+  }
+
+  .firstChild {
+    margin-top: 2.25rem;
+  }
+}

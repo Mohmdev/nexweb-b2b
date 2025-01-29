@@ -13,29 +13,45 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
-    media: Media;
     categories: Category;
+    tags: Tag;
+    media: Media;
+    assets: Asset;
+    'meta-media': MetaMedia;
     users: User;
-    redirects: Redirect;
+    'user-photos': UserPhoto;
+    search: Search;
     forms: Form;
     'form-submissions': FormSubmission;
-    search: Search;
+    redirects: Redirect;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    tags: {
+      pages: 'pages';
+      posts: 'posts';
+    };
+    'user-photos': {
+      user: 'users';
+    };
+  };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    assets: AssetsSelect<false> | AssetsSelect<true>;
+    'meta-media': MetaMediaSelect<false> | MetaMediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
-    redirects: RedirectsSelect<false> | RedirectsSelect<true>;
+    'user-photos': UserPhotosSelect<false> | UserPhotosSelect<true>;
+    search: SearchSelect<false> | SearchSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
-    search: SearchSelect<false> | SearchSelect<true>;
+    redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -68,22 +84,34 @@ export interface Config {
   };
 }
 export interface UserAuthOperations {
-  forgotPassword: {
-    email: string;
-    password: string;
-  };
-  login: {
-    email: string;
-    password: string;
-  };
+  forgotPassword:
+    | {
+        email: string;
+      }
+    | {
+        username: string;
+      };
+  login:
+    | {
+        email: string;
+        password: string;
+      }
+    | {
+        password: string;
+        username: string;
+      };
   registerFirstUser: {
-    email: string;
     password: string;
-  };
-  unlock: {
+    username: string;
     email: string;
-    password: string;
   };
+  unlock:
+    | {
+        email: string;
+      }
+    | {
+        username: string;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -135,15 +163,20 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-  };
+  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
+  meta?: Meta;
+  /**
+   * When checked, this page will not appear in search engines like Google. Use this for private pages or temporary content that should not be publicly searchable.
+   */
+  noindex?: boolean | null;
+  tags?: (number | Tag)[] | null;
+  authors?: (number | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -159,7 +192,7 @@ export interface Post {
   id: number;
   title: string;
   heroImage?: (number | null) | Media;
-  content: {
+  content?: {
     root: {
       type: string;
       children: {
@@ -173,18 +206,33 @@ export interface Post {
       version: number;
     };
     [k: string]: unknown;
-  };
-  relatedPosts?: (number | Post)[] | null;
+  } | null;
   categories?: (number | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
+  /**
+   * Content that are related to this one. Could be a page, or post, that you would like to feature in this document.
+   */
+  relatedDocs?:
+    | (
+        | {
+            relationTo: 'pages';
+            value: number | Page;
+          }
+        | {
+            relationTo: 'posts';
+            value: number | Post;
+          }
+        | {
+            relationTo: 'categories';
+            value: number | Category;
+          }
+      )[]
+    | null;
+  tags?: (number | Tag)[] | null;
+  meta?: Meta;
+  /**
+   * When checked, this page will not appear in search engines like Google. Use this for private pages or temporary content that should not be publicly searchable.
+   */
+  noindex?: boolean | null;
   authors?: (number | User)[] | null;
   populatedAuthors?:
     | {
@@ -192,6 +240,7 @@ export interface Post {
         name?: string | null;
       }[]
     | null;
+  publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -204,7 +253,13 @@ export interface Post {
  */
 export interface Media {
   id: number;
+  /**
+   * For SEO and accessibility
+   */
   alt?: string | null;
+  /**
+   * Custom caption for the image
+   */
   caption?: {
     root: {
       type: string;
@@ -220,6 +275,8 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
+  tags?: (number | Tag)[] | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -232,6 +289,14 @@ export interface Media {
   focalX?: number | null;
   focalY?: number | null;
   sizes?: {
+    original?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     thumbnail?: {
       url?: string | null;
       width?: number | null;
@@ -292,11 +357,72 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  title: string;
+  /**
+   * Optional
+   */
+  image?: (number | null) | Media;
+  /**
+   * Optional
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  pages?: {
+    docs?: (number | Page)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  posts?: {
+    docs?: (number | Post)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
   id: number;
   title: string;
+  /**
+   * Optional
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   slug?: string | null;
   slugLock?: boolean | null;
   parent?: (number | null) | Category;
@@ -313,21 +439,145 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "meta".
+ */
+export interface Meta {
+  title?: string | null;
+  /**
+   * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+   */
+  image?: (number | null) | MetaMedia;
+  description?: string | null;
+}
+/**
+ * The images used for SEO and accessibility go here. It is recommended to use a square image for best results.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "meta-media".
+ */
+export interface MetaMedia {
+  id: number;
+  alt: string;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    original?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    square?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
-  name?: string | null;
+  firstName: string;
+  lastName?: string | null;
+  photo?: (number | null) | UserPhoto;
+  role: 'admin' | 'editor' | 'public';
   updatedAt: string;
   createdAt: string;
   email: string;
+  username: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
+  _verified?: boolean | null;
+  _verificationToken?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "user-photos".
+ */
+export interface UserPhoto {
+  id: number;
+  alt?: string | null;
+  user?: {
+    docs?: (number | User)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    avatar?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    original?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -672,46 +922,30 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "redirects".
+ * via the `definition` "assets".
  */
-export interface Redirect {
+export interface Asset {
   id: number;
   /**
-   * You will need to rebuild the website when changing this field.
+   * Used for SEO and accessibility
    */
-  from: string;
-  to?: {
-    type?: ('reference' | 'custom') | null;
-    reference?:
-      | ({
-          relationTo: 'pages';
-          value: number | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: number | Post;
-        } | null);
-    url?: string | null;
-  };
+  alt?: string | null;
+  /**
+   * Dark variation of the asset for dark mode. (Optional)
+   */
+  assetDarkModeFallback?: (number | null) | Asset;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "form-submissions".
- */
-export interface FormSubmission {
-  id: number;
-  form: number | Form;
-  submissionData?:
-    | {
-        field: string;
-        value: string;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
@@ -740,6 +974,49 @@ export interface Search {
         title?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions".
+ */
+export interface FormSubmission {
+  id: number;
+  form: number | Form;
+  submissionData?:
+    | {
+        field: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects".
+ */
+export interface Redirect {
+  id: number;
+  /**
+   * You will need to rebuild the website when changing this field.
+   */
+  from: string;
+  to?: {
+    type?: ('reference' | 'custom') | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -851,20 +1128,36 @@ export interface PayloadLockedDocument {
         value: number | Post;
       } | null)
     | ({
+        relationTo: 'categories';
+        value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: number | Tag;
+      } | null)
+    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'categories';
-        value: number | Category;
+        relationTo: 'assets';
+        value: number | Asset;
+      } | null)
+    | ({
+        relationTo: 'meta-media';
+        value: number | MetaMedia;
       } | null)
     | ({
         relationTo: 'users';
         value: number | User;
       } | null)
     | ({
-        relationTo: 'redirects';
-        value: number | Redirect;
+        relationTo: 'user-photos';
+        value: number | UserPhoto;
+      } | null)
+    | ({
+        relationTo: 'search';
+        value: number | Search;
       } | null)
     | ({
         relationTo: 'forms';
@@ -875,8 +1168,8 @@ export interface PayloadLockedDocument {
         value: number | FormSubmission;
       } | null)
     | ({
-        relationTo: 'search';
-        value: number | Search;
+        relationTo: 'redirects';
+        value: number | Redirect;
       } | null)
     | ({
         relationTo: 'payload-jobs';
@@ -961,12 +1254,15 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
       };
-  meta?:
+  meta?: T | MetaSelect<T>;
+  noindex?: T;
+  tags?: T;
+  authors?: T;
+  populatedAuthors?:
     | T
     | {
-        title?: T;
-        image?: T;
-        description?: T;
+        id?: T;
+        name?: T;
       };
   publishedAt?: T;
   slug?: T;
@@ -1061,22 +1357,26 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "meta_select".
+ */
+export interface MetaSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  description?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
   content?: T;
-  relatedPosts?: T;
   categories?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  publishedAt?: T;
+  relatedDocs?: T;
+  tags?: T;
+  meta?: T | MetaSelect<T>;
+  noindex?: T;
   authors?: T;
   populatedAuthors?:
     | T
@@ -1084,6 +1384,44 @@ export interface PostsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  publishedAt?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  slug?: T;
+  slugLock?: T;
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  description?: T;
+  pages?: T;
+  posts?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -1097,6 +1435,8 @@ export interface PostsSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  tags?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1111,6 +1451,16 @@ export interface MediaSelect<T extends boolean = true> {
   sizes?:
     | T
     | {
+        original?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
         thumbnail?:
           | T
           | {
@@ -1185,52 +1535,185 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories_select".
+ * via the `definition` "assets_select".
  */
-export interface CategoriesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  slugLock?: T;
-  parent?: T;
-  breadcrumbs?:
-    | T
-    | {
-        doc?: T;
-        url?: T;
-        label?: T;
-        id?: T;
-      };
+export interface AssetsSelect<T extends boolean = true> {
+  alt?: T;
+  assetDarkModeFallback?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "meta-media_select".
+ */
+export interface MetaMediaSelect<T extends boolean = true> {
+  alt?: T;
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        original?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        og?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        square?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  name?: T;
+  firstName?: T;
+  lastName?: T;
+  photo?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
+  username?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
+  _verified?: T;
+  _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "redirects_select".
+ * via the `definition` "user-photos_select".
  */
-export interface RedirectsSelect<T extends boolean = true> {
-  from?: T;
-  to?:
+export interface UserPhotosSelect<T extends boolean = true> {
+  alt?: T;
+  user?: T;
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
     | T
     | {
-        type?: T;
-        reference?: T;
-        url?: T;
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        avatar?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        original?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "search_select".
+ */
+export interface SearchSelect<T extends boolean = true> {
+  title?: T;
+  priority?: T;
+  doc?: T;
+  slug?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  categories?:
+    | T
+    | {
+        relationTo?: T;
+        id?: T;
+        title?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1385,26 +1868,16 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "search_select".
+ * via the `definition` "redirects_select".
  */
-export interface SearchSelect<T extends boolean = true> {
-  title?: T;
-  priority?: T;
-  doc?: T;
-  slug?: T;
-  meta?:
+export interface RedirectsSelect<T extends boolean = true> {
+  from?: T;
+  to?:
     | T
     | {
-        title?: T;
-        description?: T;
-        image?: T;
-      };
-  categories?:
-    | T
-    | {
-        relationTo?: T;
-        id?: T;
-        title?: T;
+        type?: T;
+        reference?: T;
+        url?: T;
       };
   updatedAt?: T;
   createdAt?: T;

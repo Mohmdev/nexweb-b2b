@@ -5,13 +5,13 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import { homeStatic } from '@/endpoints/seed/home-static'
+import { homeStatic } from '@services/seed/general-site-data/home-static'
 
 import type { Page as PageType } from '@/payload-types'
 
-import { RenderBlocks } from '@/blocks/RenderBlocks'
+import { RenderBlocks } from '@CMS/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
-import { generateMeta } from '@/utilities/generateMeta'
+import { generateMeta } from '@utils/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 

@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
     "esModuleInterop": true,
-    "target": "ES2022",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ES2022"
-    ],
+    "target": "ES2024",
+    "lib": ["DOM", "DOM.Iterable", "ES2024"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
@@ -26,27 +23,45 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@payload-config": [
-        "./src/payload.config.ts"
-      ],
-      "react": [
-        "./node_modules/@types/react"
-      ],
-      "@/*": [
-        "./src/*"
-      ],
+      "react": ["node_modules/@types/react"],
+      "@payload-config": ["src/payload.config.ts"],
+      "@payload-types": ["src/payload-types.ts"],
+      "@admin-components/*": ["src/CMS/_components/*"],
+      "@CMS/*": ["src/CMS/*"],
+      "@access/*": ["src/services/authentication/*"],
+      "@data/*": ["src/_data/*"],
+      "@providers": ["src/providers"],
+      "@providers/*": ["src/providers/*"],
+      "@forms/*": ["src/forms/*"],
+      "@blocks/*": ["src/CMS/blocks/*"],
+      "@heros/*": ["src/heros/*"],
+      "@fields/*": ["src/CMS/fields/*"],
+      "@ui/*": ["src/components/_ui/*"],
+      "@components/*": ["src/components/*"],
+      "@scss/*": ["src/styles/scss/*"],
+      "@styles/*": ["src/styles/*"],
+      "@services/*": ["src/services/*"],
+      "@icons": ["src/lib/icons"],
+      "@utils/*": ["src/lib/utils/*"],
+      "@hooks/*": ["src/lib/hooks/*"],
+      "@constants/*": ["src/lib/constants/*"],
+      "@lib/*": ["src/lib/*"],
+      "@/*": ["src/*"]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "next-env.d.ts",
+    "src/environment.d.ts",
     ".next/types/**/*.ts",
-    "redirects.js",
-    "next.config.js",
-    "next-sitemap.config.cjs"
+    "redirects.cjs",
+    "next.config.ts",
+    "next-sitemap.config.cjs",
+    "public/scripts/*.ts",
+    "public/scripts/*.js"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules", ".temp"]
 }

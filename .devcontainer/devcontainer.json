@@ -1,0 +1,53 @@
+{
+  "name": "Node_v22/pnpm",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22",
+      "nodeGypDependencies": true
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "myaaghubi.andromeda-mariana-vscode",
+        "ms-vscode-remote.remote-containers",
+        "dsznajder.es7-react-js-snippets",
+        "tamasfe.even-better-toml",
+        "mhutchie.git-graph",
+        "heybourn.headwind",
+        "codezombiech.gitignore",
+        "ecmel.vscode-html-css",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "VisualStudioExptTeam.intellicode-api-usage-examples",
+        "Zignd.html-css-class-completion",
+        "christian-kohler.npm-intellisense",
+        "christian-kohler.path-intellisense",
+        "YoavBls.pretty-ts-errors",
+        "jakob101.RelativePath",
+        "SimonSiefke.svg-preview",
+        "bradlc.vscode-tailwindcss",
+        "OmriGrossman.tailwind-color-matcher",
+        "Gruntfuggly.todo-tree",
+        "cweijan.vscode-database-client2",
+        "cweijan.dbclient-jdbc",
+        "pomber.git-file-history",
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-ssh-edit",
+        "ms-vscode.remote-server",
+        "ms-vscode.remote-explorer",
+        "macieklad.tailwind-sass-syntax",
+        "vscode-icons-team.vscode-icons",
+        "WakaTime.vscode-wakatime"
+      ]
+    }
+  },
+
+  "postCreateCommand": "npm install -g pnpm vercel railway",
+
+  "remoteUser": "node"
+}
