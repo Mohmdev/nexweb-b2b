@@ -1,9 +1,7 @@
-import type { NextConfig } from 'next'
-
-import { withPayload } from '@payloadcms/next/withPayload'
-
 import { withToolbar } from '@lib/vercel-toolbar'
-import redirects from './redirects.js'
+import { withPayload } from '@payloadcms/next/withPayload'
+import type { NextConfig } from 'next'
+import redirects from './redirects.cjs'
 
 const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
@@ -12,6 +10,9 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   redirects,
+  experimental: {
+    reactCompiler: true,
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
