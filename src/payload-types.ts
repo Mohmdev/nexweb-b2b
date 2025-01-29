@@ -63,10 +63,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    'global-settings': GlobalSetting;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'global-settings': GlobalSettingsSelect<false> | GlobalSettingsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2005,6 +2007,55 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-settings".
+ */
+export interface GlobalSetting {
+  id: number;
+  siteIdentity?: {
+    siteName?: string | null;
+    siteDescription?: string | null;
+  };
+  branding?: {
+    /**
+     * Light-colored version of your logo optimized for dark backgrounds and dark mode displays.
+     */
+    logo?: (number | null) | Asset;
+    /**
+     * Dark-colored version of your logo optimized for light backgrounds and standard displays.
+     */
+    logoSquare?: (number | null) | Asset;
+    /**
+     * The small icon that is displayed in the browser tab. Recommended size: 32x32px.
+     */
+    favicon?: (number | null) | Asset;
+  };
+  contactInfo?: {
+    contactName?: string | null;
+    contactEmail?: string | null;
+    contactPhone?: string | null;
+    contactAddress?: string | null;
+    socialMedia?: {
+      facebook?: string | null;
+      twitter?: string | null;
+      instagram?: string | null;
+      linkedin?: string | null;
+      youtube?: string | null;
+      whatsapp?: string | null;
+      telegram?: string | null;
+    };
+  };
+  globalSeo?: {
+    keywords?: string | null;
+    /**
+     * The image that will appear when sharing your site on social media.
+     */
+    ogImage?: (number | null) | Asset;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2044,6 +2095,53 @@ export interface FooterSelect<T extends boolean = true> {
               label?: T;
             };
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-settings_select".
+ */
+export interface GlobalSettingsSelect<T extends boolean = true> {
+  siteIdentity?:
+    | T
+    | {
+        siteName?: T;
+        siteDescription?: T;
+      };
+  branding?:
+    | T
+    | {
+        logo?: T;
+        logoSquare?: T;
+        favicon?: T;
+      };
+  contactInfo?:
+    | T
+    | {
+        contactName?: T;
+        contactEmail?: T;
+        contactPhone?: T;
+        contactAddress?: T;
+        socialMedia?:
+          | T
+          | {
+              facebook?: T;
+              twitter?: T;
+              instagram?: T;
+              linkedin?: T;
+              youtube?: T;
+              whatsapp?: T;
+              telegram?: T;
+            };
+      };
+  globalSeo?:
+    | T
+    | {
+        keywords?: T;
+        ogImage?: T;
       };
   updatedAt?: T;
   createdAt?: T;

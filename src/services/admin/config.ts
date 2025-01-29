@@ -1,15 +1,15 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+import { Users } from '@auth/Users/config'
 import type { Config } from 'payload'
-import { Users } from '@services/authentication/Users/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export const adminConfig: Config['admin'] = {
   avatar: {
-    Component: '@admin-components/AdminAvatar',
+    Component: '@services/admin/AdminAvatar',
   },
   components: {
     graphics: {

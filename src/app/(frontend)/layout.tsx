@@ -1,20 +1,17 @@
-import type { Metadata } from 'next'
-
-import { cn } from '@utils/ui'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
-import React from 'react'
-
 import { Footer } from '@CMS/globals/Footer/Component'
 import { Header } from '@CMS/globals/Header/Component'
 import { AdminBar } from '@components/AdminBar'
 import { Providers } from '@providers'
 import { InitTheme } from '@providers/Theme/InitTheme'
-import { mergeOpenGraph } from '@utils/mergeOpenGraph'
-import { draftMode } from 'next/headers'
-
-import '@styles/frontend/globals.css'
+import { mergeOpenGraph } from '@services/seo/mergeOpenGraph'
 import { getServerSideURL } from '@utils/getURL'
+import { cn } from '@utils/ui'
+import { GeistMono } from 'geist/font/mono'
+import { GeistSans } from 'geist/font/sans'
+import type { Metadata } from 'next'
+import { draftMode } from 'next/headers'
+import React from 'react'
+import '@styles/frontend/globals.css'
 
 export default async function RootLayout({
   children,

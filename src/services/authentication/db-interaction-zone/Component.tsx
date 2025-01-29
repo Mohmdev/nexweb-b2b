@@ -6,8 +6,6 @@ import { SeedButton } from './SeedButton'
 import type { User } from '@payload-types'
 import { useAuth } from '@payloadcms/ui'
 
-import './index.scss'
-
 export const DbInteractionZone: React.FC = () => {
   const { user } = useAuth<User>()
 

@@ -94,8 +94,7 @@ export const Users: CollectionConfig<'users'> = {
       label: '',
       admin: {
         components: {
-          Field:
-            '@services/authentication/db-interaction-zone/Component#DbInteractionZone',
+          Field: '@auth/db-interaction-zone/Component#DbInteractionZone',
         },
         position: 'sidebar',
       },
